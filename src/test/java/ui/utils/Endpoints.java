@@ -1,4 +1,4 @@
-package utils;
+package ui.utils;
 
 public class Endpoints {
 

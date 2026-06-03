@@ -1,5 +1,6 @@
-package utils;
+package ui.enums;
 
+/// Тестовые юзеры
 public enum TestUser {
 
     STANDARD_USER("standard_user", "secret_sauce"),

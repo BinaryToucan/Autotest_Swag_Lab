@@ -1,9 +1,9 @@
-package pages;
+package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import utils.Endpoints;
-import utils.TestUser;
+import ui.utils.Endpoints;
+import ui.enums.TestUser;
 
 /// Страница логина
 public class LoginPage extends BasePage {

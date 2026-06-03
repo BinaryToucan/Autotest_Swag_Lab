@@ -1,10 +1,11 @@
-package tests;
+package ui.tests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pages.LoginPage;
-import utils.Endpoints;
-import utils.TestUser;
+import ui.enums.ErrorMessage;
+import ui.pages.LoginPage;
+import ui.utils.Endpoints;
+import ui.enums.TestUser;
 
 public class LoginTest extends BaseTest {
 
@@ -34,9 +35,7 @@ public class LoginTest extends BaseTest {
 
         String errorText = loginPage.getErrorMessage();
         Assertions.assertTrue(
-                errorText.contains(
-                        "Epic sadface: Username and password do not match any user in this service"
-                )
+                errorText.contains(ErrorMessage.INVALID_PASSWORD.getText())
         );
     }
 
@@ -51,10 +50,22 @@ public class LoginTest extends BaseTest {
 
         String errorText = loginPage.getErrorMessage();
         Assertions.assertTrue(
-                errorText.contains(
-                        "Epic sadface: Sorry, this user has been locked out."
-                )
+                errorText.contains(ErrorMessage.LOCKED_USER.getText())
         );
     }
 
+    /// Попытка входа без ввода данных
+    @Test
+    public void emptyUserTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+
+        loginPage.clickLogin();
+
+        String errorText = loginPage.getErrorMessage();
+        Assertions.assertTrue(
+                errorText.contains(ErrorMessage.EMPTY_USER.getText())
+        );
+    }
 }
