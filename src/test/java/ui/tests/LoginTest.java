@@ -37,6 +37,8 @@ public class LoginTest extends BaseTest {
         Assertions.assertTrue(
                 errorText.contains(ErrorMessage.INVALID_PASSWORD.getText())
         );
+        Assertions.assertTrue(loginPage.isUsernameFieldInvalid());
+        Assertions.assertTrue(loginPage.isPasswordFieldInvalid());
     }
 
     /// Попытка входа заблокированного юзера
@@ -52,6 +54,8 @@ public class LoginTest extends BaseTest {
         Assertions.assertTrue(
                 errorText.contains(ErrorMessage.LOCKED_USER.getText())
         );
+        Assertions.assertTrue(loginPage.isUsernameFieldInvalid());
+        Assertions.assertTrue(loginPage.isPasswordFieldInvalid());
     }
 
     /// Попытка входа без ввода данных
@@ -65,7 +69,45 @@ public class LoginTest extends BaseTest {
 
         String errorText = loginPage.getErrorMessage();
         Assertions.assertTrue(
-                errorText.contains(ErrorMessage.EMPTY_USER.getText())
+                errorText.contains(ErrorMessage.REQUIRED_USER.getText())
         );
+        Assertions.assertTrue(loginPage.isUsernameFieldInvalid());
+        Assertions.assertTrue(loginPage.isPasswordFieldInvalid());
+    }
+
+    /// Попытка входа с логином, но без пароля
+    @Test
+    public void emptyPassTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.enterUsername(TestUser.STANDARD_USER.getUsername());
+
+        loginPage.clickLogin();
+
+        String errorText = loginPage.getErrorMessage();
+        Assertions.assertTrue(
+                errorText.contains(ErrorMessage.REQUIRED_PASSWORD.getText())
+        );
+        Assertions.assertTrue(loginPage.isUsernameFieldInvalid());
+        Assertions.assertTrue(loginPage.isPasswordFieldInvalid());
+    }
+
+    /// Попытка входа с паролем, но без логина
+    @Test
+    public void emptyUsernameTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.enterPassword(TestUser.STANDARD_USER.getPassword());
+
+        loginPage.clickLogin();
+
+        String errorText = loginPage.getErrorMessage();
+        Assertions.assertTrue(
+                errorText.contains(ErrorMessage.REQUIRED_USER.getText())
+        );
+        Assertions.assertTrue(loginPage.isUsernameFieldInvalid());
+        Assertions.assertTrue(loginPage.isPasswordFieldInvalid());
     }
 }

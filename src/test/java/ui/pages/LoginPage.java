@@ -46,4 +46,19 @@ public class LoginPage extends BasePage {
     public String getErrorMessage() {
         return driver.findElement(errorMessage).getText();
     }
+
+    /// Добавился ли класс ошибки
+    public boolean isFieldInvalid(By element) {
+        return driver.findElement(element)
+                .getAttribute("class")
+                .contains("error");
+    }
+
+    public boolean isUsernameFieldInvalid() {
+        return isFieldInvalid(usernameInput);
+    }
+
+    public boolean isPasswordFieldInvalid() {
+        return isFieldInvalid(passwordInput);
+    }
 }
