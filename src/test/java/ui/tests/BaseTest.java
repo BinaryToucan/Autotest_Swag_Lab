@@ -3,7 +3,9 @@ package ui.tests;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import ui.utils.DriverFactory;
+
+import java.net.MalformedURLException;
 
 /// Базовый класс для тестов
 public class BaseTest {
@@ -12,8 +14,8 @@ public class BaseTest {
 
     /// Создаем браузер перед каждым тестом
     @BeforeEach
-    public void setUp() {
-        driver = new ChromeDriver();
+    public void setUp() throws MalformedURLException {
+        driver = DriverFactory.createDriver();
         driver.manage().window().maximize();
     }
 

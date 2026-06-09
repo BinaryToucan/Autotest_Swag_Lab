@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'groovy'
+    id 'io.qameta.allure' version '2.12.0'
 }
 
 group = 'org.example'
@@ -10,10 +12,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.codehaus.groovy:groovy:3.0.21'
     implementation 'org.seleniumhq.selenium:selenium-java:4.15.0' // WebDrive
-    implementation 'io.github.bonigarcia:webdrivermanager:5.8.0' // Spock
-    testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-3.0' // JUnit Platform testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
+    implementation 'io.github.cdimascio:java-dotenv:5.2.2'
+    implementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.0'
+    testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0' // JUnit Platform testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

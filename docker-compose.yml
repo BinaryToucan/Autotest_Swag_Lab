@@ -1,0 +1,17 @@
+services:
+  tests:
+    build: .
+    container_name: autotest_tests
+    depends_on:
+      - chrome
+    env_file:
+      - .env
+    environment:
+      SELENIUM_URL: http://chrome:4444/wd/hub
+    volumes:
+      - ./allure-results:/app/allure-results
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - "4444:4444"
