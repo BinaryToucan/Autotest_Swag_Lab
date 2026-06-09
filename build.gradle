@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'groovy'
     id 'io.qameta.allure' version '2.12.0'
+    id("io.freefair.lombok") version "9.5.0"
 }
 
 group = 'org.example'
