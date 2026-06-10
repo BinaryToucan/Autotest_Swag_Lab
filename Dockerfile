@@ -7,6 +7,4 @@ COPY . .
 
 RUN chmod +x gradlew
 
-RUN ./gradlew dependencies
-
 CMD ["./gradlew", "clean", "test"]

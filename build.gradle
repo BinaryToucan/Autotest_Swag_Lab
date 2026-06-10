@@ -24,6 +24,17 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+tasks.register('apiTest', Test) {
+    useJUnitPlatform {
+        includeTags 'api'
+    }
+}
+
+tasks.register('uiTest', Test) {
+    useJUnitPlatform {
+        includeTags 'ui'
+    }
+}
 test {
     useJUnitPlatform()
 }
