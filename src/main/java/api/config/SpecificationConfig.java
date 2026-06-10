@@ -1,6 +1,6 @@
 package api.config;
 
-import config.ConfigReader;
+import utils.ConfigReader;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 

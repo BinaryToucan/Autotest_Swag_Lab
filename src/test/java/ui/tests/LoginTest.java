@@ -6,7 +6,9 @@ import ui.enums.ErrorMessage;
 import ui.pages.LoginPage;
 import ui.utils.Endpoints;
 import ui.enums.TestUser;
+import annotations.UiTest;
 
+@UiTest
 public class LoginTest extends BaseTest {
 
     /// Успешная авторизация существующего юзера

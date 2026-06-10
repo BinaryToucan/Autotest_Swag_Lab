@@ -1,7 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.WebDriver;
-import config.ConfigReader;
+import utils.ConfigReader;
 
 /// Базовый класс для страниц
 public abstract class BasePage {

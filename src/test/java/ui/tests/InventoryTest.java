@@ -10,10 +10,12 @@ import ui.enums.TestUser;
 import ui.pages.InventoryPage;
 import ui.pages.LoginPage;
 import ui.utils.Endpoints;
+import annotations.UiTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@UiTest
 public class InventoryTest extends BaseTest {
 
     // Перед каждым тестом авторизуемся под существующим юзером

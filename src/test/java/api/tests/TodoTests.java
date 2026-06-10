@@ -3,6 +3,7 @@ package api.tests;
 import api.clients.TodoClient;
 import api.models.Todo;
 import org.junit.jupiter.api.Test;
+import annotations.ApiTest;
 
 import java.util.List;
 
@@ -11,12 +12,12 @@ import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@ApiTest
 public class TodoTests {
     TodoClient todoClient = new TodoClient();
 
     @Test
     void checkSingleTodo() {
-
         Todo todo =
                 todoClient
                         .getTodo(1)

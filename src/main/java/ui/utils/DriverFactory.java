@@ -1,6 +1,6 @@
 package ui.utils;
 
-import config.ConfigReader;
+import utils.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

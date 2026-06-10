@@ -2,14 +2,14 @@ package api.tests;
 
 import api.clients.UserClient;
 import api.models.user.User;
-import config.ConfigReader;
 import org.junit.jupiter.api.Test;
+import annotations.ApiTest;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@ApiTest
 public class UserTests extends TestBase {
 
     UserClient userClient = new UserClient();
