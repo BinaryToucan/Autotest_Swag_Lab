@@ -2,10 +2,12 @@ package api.clients;
 
 import api.utils.Endpoints;
 import io.restassured.response.Response;
-import static io.restassured.RestAssured.given;
 
+/// Клиент для работы с User API
 public class UserClient extends BaseApiClient{
 
+    /// Получает список всех пользователей.
+    /// @return HTTP response со списком пользователей
     public Response getUsers() {
         return request()
                 .when()
@@ -13,6 +15,9 @@ public class UserClient extends BaseApiClient{
                 .get(Endpoints.USERS);
     }
 
+    /// Получает пользователя по его идентификатору.
+    /// @param id идентификатор пользователя
+    /// @return HTTP response с данными пользователя
     public Response getUser(int id) {
         return request()
                 .when()
