@@ -3,7 +3,7 @@
 This is a hybrid automation framework for UI and API testing written in Java.
 
 ## UI Testing
-UI tests are implemented for the **SauceDemo** web application using:
+UI tests are implemented for the **SauceDemo** (https://www.saucedemo.com) using:
 - Selenium WebDriver
 - Page Object Model (POM)
 - JUnit 5
