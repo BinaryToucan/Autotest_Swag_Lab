@@ -94,7 +94,7 @@ public class TodoTests {
     }
 
     @ParameterizedTest
-    @MethodSource("todos")
+    @MethodSource("allTodos")
     @DisplayName("Todo should contain all required fields")
     void shouldContainAllRequiredFields(Todo todo) {
         assertAll(
@@ -105,7 +105,7 @@ public class TodoTests {
         );
     }
 
-    static Stream<Todo> todos() {
+    static Stream<Todo> allTodos() {
         return new TodoClient()
                 .getAllTodos()
                 .then()
