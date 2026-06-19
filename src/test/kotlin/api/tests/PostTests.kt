@@ -1,5 +1,6 @@
 package api.tests
 
+import annotations.ApiTest
 import api.clients.PostClient
 import api.models.CreatePostRequest
 import api.models.Post
@@ -10,6 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.api.Test
 
+@ApiTest
 class PostTests {
 
     companion object {
