@@ -1,5 +1,6 @@
 package api.clients
 
+import api.models.CreatePostRequest
 import api.models.Post
 import api.utils.Endpoints
 import io.restassured.response.Response
@@ -28,4 +29,9 @@ class PostClient: BaseApiClient() {
             .extract()
             .jsonPath()
             .getList("", Post::class.java)
+
+    fun createPost(post: CreatePostRequest): Response =
+        request()
+            .body(post)
+            .post(Endpoints.POSTS)
 }
