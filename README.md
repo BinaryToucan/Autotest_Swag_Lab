@@ -1,6 +1,6 @@
 # UI + API Automation Framework
 
-This is a hybrid automation framework for UI and API testing written in Java.
+This is a hybrid automation framework for UI and API testing written in Java + Kotlin.
 
 ## UI Testing
 UI tests are implemented for the **SauceDemo** (https://www.saucedemo.com) using:
