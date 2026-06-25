@@ -17,12 +17,13 @@ class PhotoClient: BaseApiClient() {
             .extract()
             .`as`(Photo::class.java)
 
-    fun getPhotos(): Response =
+    fun getPhotosByAlbumId(albumId: Int): Response =
         request()
-            .get(Endpoints.POSTS)
+            .queryParam("albumId", albumId)
+            .get(Endpoints.PHOTOS)
 
-    fun getPhotosAsList(): List<Photo> =
-        getPhotos()
+    fun getPhotosAsListByAlbumId(albumId: Int): List<Photo> =
+        getPhotosByAlbumId(albumId)
             .then()
             .statusCode(200)
             .extract()
