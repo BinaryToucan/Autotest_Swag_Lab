@@ -22,6 +22,6 @@ public class UserClient extends BaseApiClient{
         return request()
                 .when()
                 .log().all()
-                .get(Endpoints.USERS + id);
+                .get(Endpoints.USERS + "/" + id);
     }
 }

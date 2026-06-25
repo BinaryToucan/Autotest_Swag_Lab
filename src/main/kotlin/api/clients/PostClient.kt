@@ -9,7 +9,7 @@ class PostClient: BaseApiClient() {
 
     fun getPost(id: Int): Response =
         request()
-            .get("${Endpoints.POSTS}$id")
+            .get("${Endpoints.POSTS}/$id")
 
     fun getPostAsModel(id: Int): Post =
         getPost(id)

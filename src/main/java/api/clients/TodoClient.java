@@ -15,7 +15,7 @@ public class TodoClient extends BaseApiClient{
     public Response getTodo(int id) {
         return request()
                 .when()
-                .get(Endpoints.TODOS + id);
+                .get(Endpoints.TODOS + "/" + id);
     }
 
     /// Получает список всех задач.

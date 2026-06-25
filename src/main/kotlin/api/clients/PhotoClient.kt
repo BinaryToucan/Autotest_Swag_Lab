@@ -8,7 +8,7 @@ class PhotoClient: BaseApiClient() {
 
     fun getPhoto(id: Int): Response =
         request()
-            .get("${Endpoints.PHOTOS}$id")
+            .get("${Endpoints.PHOTOS}/$id")
 
     fun getPhotoAsModel(id: Int): Photo =
         getPhoto(id)
