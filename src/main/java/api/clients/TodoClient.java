@@ -13,7 +13,6 @@ public class TodoClient extends BaseApiClient{
     /// @param id идентификатор задачи
     /// @return HTTP response с данными задачи
     public Response getTodo(int id) {
-
         return request()
                 .when()
                 .get(Endpoints.TODOS + id);
@@ -22,10 +21,7 @@ public class TodoClient extends BaseApiClient{
     /// Получает список всех задач.
     /// @return HTTP response со списком задач
     public Response getAllTodos() {
-
-        return given()
-                .spec(requestSpec())
-                .when()
+        return request()
                 .get(Endpoints.TODOS);
     }
 }
