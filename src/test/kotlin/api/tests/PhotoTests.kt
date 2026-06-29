@@ -1,5 +1,7 @@
 package api.tests
 
+import annotations.ApiTest
+import annotations.SmokeTest
 import api.clients.PhotoClient
 import api.models.Photo
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,6 +12,8 @@ import org.junit.jupiter.api.assertAll
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
+@ApiTest
+@SmokeTest
 class PhotoTests {
 
     companion object {
@@ -26,6 +30,20 @@ class PhotoTests {
             0,
             -1,
             50001
+        )
+
+        @JvmStatic
+        fun validPhotosIds() = listOf(
+            2,
+            5,
+            5000
+        )
+
+        @JvmStatic
+        fun validAlbumIds() = listOf(
+            1,
+            2,
+            5
         )
     }
 
@@ -44,6 +62,15 @@ class PhotoTests {
         )
     }
 
+    @ParameterizedTest
+    @MethodSource("validPhotosIds")
+    fun `returned photo id should match requested id`(id: Int) {
+
+        val photo = photoClient
+            .getPhotoAsModel(id)
+
+        assertEquals(photo.id, id)
+    }
 
     @ParameterizedTest(name = "Photo id {0} should return 404")
     @MethodSource("invalidPhotosIds")
@@ -60,14 +87,31 @@ class PhotoTests {
         assertTrue(photos.any { it.id == EXPECTED_PHOTO.id })
     }
 
-    @Test
-    fun `should get all photos by album Id`() {
+    @ParameterizedTest(name = "Album id {0} should return his photos")
+    @MethodSource("validAlbumIds")
+    fun `should get photos by album Id`(albumId: Int) {
 
-        val photos = photoClient.getPhotosAsListByAlbumId(EXPECTED_PHOTO.albumId)
+        val photos = photoClient.getPhotosAsListByAlbumId(albumId)
 
         assertAll(
             { assertFalse(photos.isEmpty()) },
-            { assertTrue(photos.all { it.albumId == EXPECTED_PHOTO.albumId }) }
+            { assertTrue(photos.all { it.albumId == albumId }) }
+        )
+    }
+
+    @Test
+    fun `posts should have valid fields`() {
+
+        val photos = photoClient.getPhotosAsListByAlbumId(EXPECTED_PHOTO.albumId)
+
+        assertTrue(
+            photos.all {
+                it.id > 0 &&
+                        it.albumId == EXPECTED_PHOTO.albumId &&
+                        it.title.isNotBlank() &&
+                        it.thumbnailUrl.isNotBlank() &&
+                        it.url.isNotBlank()
+            }
         )
     }
 }

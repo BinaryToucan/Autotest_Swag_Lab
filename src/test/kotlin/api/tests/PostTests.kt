@@ -1,6 +1,7 @@
 package api.tests
 
 import annotations.ApiTest
+import annotations.SmokeTest
 import api.clients.PostClient
 import api.models.CreatePostRequest
 import api.models.Post
@@ -41,6 +42,7 @@ class PostTests {
 
     private val postClient = PostClient()
 
+    @SmokeTest
     @Test
     fun `should get post by id`() {
 
@@ -54,6 +56,7 @@ class PostTests {
         )
     }
 
+    @SmokeTest
     @Test
     fun `should have post in list`() {
 
@@ -62,6 +65,7 @@ class PostTests {
         assertTrue(posts.any { it.id == EXPECTED_POST.id })
     }
 
+    @SmokeTest
     @Test
     fun `should get all posts`() {
 
@@ -88,6 +92,17 @@ class PostTests {
         )
     }
 
+    @SmokeTest
+    @Test
+    fun `first post should contain required data`() {
+
+        val post = postClient.getPostsAsList().first()
+
+        assertTrue(post.id > 0)
+        assertTrue(post.title.isNotBlank())
+    }
+
+    @SmokeTest
     @Test
     fun `user 1 should have 10 posts`() {
 
@@ -101,6 +116,7 @@ class PostTests {
     /**
      * Всегда только 100 постов
      */
+    @SmokeTest
     @ParameterizedTest(name = "Post id {0} should return 404")
     @MethodSource("invalidPostIds")
     fun `should return 404 for non existing post ids`(postId: Int) {
@@ -110,6 +126,7 @@ class PostTests {
             .statusCode(404)
     }
 
+    @SmokeTest
     @Test
     fun `should create post`() {
 

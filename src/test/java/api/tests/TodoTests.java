@@ -1,16 +1,17 @@
 package api.tests;
 
+import annotations.SmokeTest;
 import api.clients.TodoClient;
 import api.models.Todo;
+import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import annotations.ApiTest;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.util.List;
-import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ApiTest
@@ -20,8 +21,9 @@ public class TodoTests {
 
     private final TodoClient todoClient = new TodoClient();
 
-    @DisplayName("Should return 200 for existing todo")
+    @SmokeTest
     @Test
+    @DisplayName("Should return 200 for existing todo")
     void checkValidSingleTodo() {
         var todo =
                 todoClient
@@ -37,6 +39,7 @@ public class TodoTests {
         );
     }
 
+    @SmokeTest
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 201})
     @DisplayName("Should return 404 for invalid todo")
@@ -47,8 +50,9 @@ public class TodoTests {
                 .statusCode(404);
     }
 
-    @DisplayName("Should return all todos")
+    @SmokeTest
     @Test
+    @DisplayName("Should return all todos")
     void checkTodosCount() {
 
         List<Todo> todos =
@@ -63,6 +67,7 @@ public class TodoTests {
         assertEquals(EXPECTED_TODOS_COUNT, todos.size());
     }
 
+    @SmokeTest
     @Test
     @DisplayName("Should map todo correctly")
     void shouldMapTodoCorrectly() {
@@ -81,6 +86,7 @@ public class TodoTests {
         );
     }
 
+    @SmokeTest
     @Test
     @DisplayName("Should return identical todo for repeated requests")
     void shouldBeEqual() {
@@ -93,25 +99,32 @@ public class TodoTests {
         assertEquals(first, second);
     }
 
-    @ParameterizedTest
-    @MethodSource("allTodos")
+    @Test
     @DisplayName("Todo should contain all required fields")
-    void shouldContainAllRequiredFields(Todo todo) {
+    void shouldContainAllRequiredFields() {
+
+        List<Todo> todos = todoClient.getAllTodosAsList();
+
+        assertThat(todos)
+            .allSatisfy(todo -> {
+                assertThat(todo.getUserId()).isPositive();
+                assertThat(todo.getId()).isPositive();
+                assertThat(todo.getTitle()).isNotBlank();
+        });
+    }
+
+    @SmokeTest
+    @Test
+    @DisplayName("Todo should contain all required fields")
+    void firstTodoShouldContainAllRequiredFields() {
+
+        val todo = todoClient.getAllTodosAsList().getFirst();
+
         assertAll(
                 () -> assertTrue(todo.getUserId() > 0),
                 () -> assertTrue(todo.getId() > 0),
                 () -> assertNotNull(todo.getTitle()),
                 () -> assertFalse(todo.getTitle().isBlank())
         );
-    }
-
-    static Stream<Todo> allTodos() {
-        return new TodoClient()
-                .getAllTodos()
-                .then()
-                .extract()
-                .jsonPath()
-                .getList("", Todo.class)
-                .stream();
     }
 }

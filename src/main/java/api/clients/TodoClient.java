@@ -1,9 +1,11 @@
 package api.clients;
 
+import api.models.Todo;
 import api.utils.Endpoints;
 import io.restassured.response.Response;
 
-import static api.config.SpecificationConfig.requestSpec;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 /// Клиент для работы с Todo API
@@ -23,5 +25,16 @@ public class TodoClient extends BaseApiClient{
     public Response getAllTodos() {
         return request()
                 .get(Endpoints.TODOS);
+    }
+
+    /// Получает список всех задач как список.
+    /// @return список задач
+    public List<Todo> getAllTodosAsList() {
+        return request()
+                .get(Endpoints.TODOS)
+                .then()
+                .extract()
+                .jsonPath()
+                .getList("", Todo.class);
     }
 }
