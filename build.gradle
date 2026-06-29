@@ -22,6 +22,7 @@ dependencies {
     testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0' // JUnit Platform testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.assertj:assertj-core:3.27.3'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation "org.jetbrains.kotlin:kotlin-test"
     testImplementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0'
@@ -46,6 +47,12 @@ tasks.register('apiTest', Test) {
 tasks.register('uiTest', Test) {
     useJUnitPlatform {
         includeTags 'ui'
+    }
+}
+
+tasks.register('smokeTest', Test) {
+    useJUnitPlatform {
+        includeTags 'smoke'
     }
 }
 test {

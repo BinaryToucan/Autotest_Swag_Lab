@@ -8,7 +8,38 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: "Choose test suite"
+        required: true
+        type: choice
+        options:
+          - api
+          - ui
+
+
 jobs:
+  smoke-tests:
+      if: github.event_name != 'workflow_dispatch'
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Setup Java 17
+          uses: actions/setup-java@v4
+          with:
+            distribution: temurin
+            java-version: 17
+
+        - name: Grant execute permission for gradlew
+          run: chmod +x gradlew
+
+        - name: Run Smoke tests
+          run: ./gradlew clean smokeTest
+
   api-tests:
     runs-on: ubuntu-latest
 
