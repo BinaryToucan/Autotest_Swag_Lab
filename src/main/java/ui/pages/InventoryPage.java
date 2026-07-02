@@ -3,10 +3,13 @@ package ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.enums.SortingOption;
 import ui.utils.Endpoints;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +39,16 @@ public class InventoryPage extends BasePage {
     }
 
     public void addFirstProductToCart() {
-        driver.findElement(addToCartButton).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(addToCartButton)).click();
+
+        wait.until(driver ->
+                !driver.findElements(shoppingCartBadge).isEmpty()
+        );
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartBadge));
     }
 
     public String getCartBadgeText() {
