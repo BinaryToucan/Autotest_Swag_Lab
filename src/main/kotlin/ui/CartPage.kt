@@ -2,8 +2,11 @@ package ui
 
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
 import ui.pages.BasePage
 import ui.utils.Endpoints
+import java.time.Duration
 
 class CartPage(driver: WebDriver): BasePage(driver){
 
@@ -33,6 +36,9 @@ class CartPage(driver: WebDriver): BasePage(driver){
         driver.findElement(item)
             .findElement(removeButton)
             .click()
+
+        WebDriverWait(driver, Duration.ofSeconds(5))
+            .until(ExpectedConditions.numberOfElementsToBe(item, 0))
     }
 
     fun shouldContainItem(itemName: String): Boolean {
