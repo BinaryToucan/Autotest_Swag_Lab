@@ -18,6 +18,7 @@ dependencies {
     implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
     implementation 'io.github.cdimascio:java-dotenv:5.2.2'
     implementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'com.codeborne:selenide:7.8.1'
     testImplementation 'io.qameta.allure:allure-junit5:2.29.0'
     testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0' // JUnit Platform testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation platform('org.junit:junit-bom:5.10.0')
