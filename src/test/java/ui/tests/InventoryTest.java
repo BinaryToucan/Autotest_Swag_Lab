@@ -16,17 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @UiTest
-public class InventoryTest extends BaseTest {
-
-    // Перед каждым тестом авторизуемся под существующим юзером
-    @BeforeEach
-    public void login() {
-        LoginPage loginPage =
-                new LoginPage(driver);
-
-        loginPage.open();
-        loginPage.login(TestUser.STANDARD_USER);
-    }
+public class InventoryTest extends BaseAuthTest {
 
     @Test
     public void userCanAddProductToCart() {
