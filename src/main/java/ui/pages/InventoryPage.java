@@ -48,7 +48,7 @@ public class InventoryPage extends BasePage {
                 !driver.findElements(shoppingCartBadge).isEmpty()
         );
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartBadge));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartBadge));
     }
 
     public String getCartBadgeText() {
