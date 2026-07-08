@@ -14,11 +14,6 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
-        - name: Check Allure results
-          if: always()
-          run: |
-            ls -la build
-            ls -la build/allure-results
 
         - name: Checkout code
           uses: actions/checkout@v4
@@ -44,7 +39,7 @@ jobs:
             path: build/allure-results
 
         - name: Generate Allure Report
-          run: ./gradlew build/allureReport
+          run: ./gradlew allureReport
 
         - name: Upload Allure Report
           uses: actions/upload-artifact@v4
