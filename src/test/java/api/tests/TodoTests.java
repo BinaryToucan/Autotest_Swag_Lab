@@ -3,6 +3,7 @@ package api.tests;
 import annotations.SmokeTest;
 import api.clients.TodoClient;
 import api.models.Todo;
+import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,14 +15,18 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Epic("ToDo API")
+@Feature("ToDos")
 @ApiTest
-public class TodoTests {
+public class TodoTests extends BaseTest {
     private static final int EXPECTED_TODOS_COUNT = 200;
     private static final int EXISTING_TODO_ID = 1;
 
     private final TodoClient todoClient = new TodoClient();
 
     @SmokeTest
+    @Story("Получение задачи по ID")
+    @Severity(SeverityLevel.BLOCKER)
     @Test
     @DisplayName("Should return 200 for existing todo")
     void checkValidSingleTodo() {
@@ -42,6 +47,8 @@ public class TodoTests {
     @SmokeTest
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 201})
+    @Story("Получение задачи по ID")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Should return 404 for invalid todo")
     void checkTodoWithInvalidId(int id) {
         todoClient
@@ -52,6 +59,8 @@ public class TodoTests {
 
     @SmokeTest
     @Test
+    @Story("Получение всех задач")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Should return all todos")
     void checkTodosCount() {
 
@@ -69,6 +78,8 @@ public class TodoTests {
 
     @SmokeTest
     @Test
+    @Story("Получение задач по ID")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Should map todo correctly")
     void shouldMapTodoCorrectly() {
         Todo todo = todoClient
@@ -88,6 +99,8 @@ public class TodoTests {
 
     @SmokeTest
     @Test
+    @Story("Получение задач по ID")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Should return identical todo for repeated requests")
     void shouldBeEqual() {
         Todo first = todoClient.getTodo(EXISTING_TODO_ID)
@@ -100,7 +113,9 @@ public class TodoTests {
     }
 
     @Test
-    @DisplayName("Todo should contain all required fields")
+    @Story("Получение всех задач")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Todo should contain all required fields in all todos")
     void shouldContainAllRequiredFields() {
 
         List<Todo> todos = todoClient.getAllTodosAsList();
@@ -115,7 +130,9 @@ public class TodoTests {
 
     @SmokeTest
     @Test
-    @DisplayName("Todo should contain all required fields")
+    @Story("Получение задачи по ID")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Todo should contain all required fields in first todo")
     void firstTodoShouldContainAllRequiredFields() {
 
         val todo = todoClient.getAllTodosAsList().getFirst();
