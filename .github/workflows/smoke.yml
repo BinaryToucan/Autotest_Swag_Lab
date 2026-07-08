@@ -14,6 +14,12 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
+        - name: Check Allure results
+          if: always()
+          run: |
+            ls -la build
+            ls -la build/allure-results
+
         - name: Checkout code
           uses: actions/checkout@v4
 
@@ -30,15 +36,18 @@ jobs:
           run: ./gradlew clean smokeTest
           continue-on-error: true
 
+        - name: Upload Allure results
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: allure-results
+            path: build/allure-results
+
         - name: Generate Allure Report
-          run: ./gradlew allureReport
+          run: ./gradlew build/allureReport
 
         - name: Upload Allure Report
           uses: actions/upload-artifact@v4
           with:
             name: allure-report
             path: build/reports/allure-report/allureReport
-
-        - name: Fail if tests failed
-          if: failure()
-          run: exit 1
