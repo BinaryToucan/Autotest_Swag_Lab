@@ -45,7 +45,7 @@ jobs:
             path: build/allure-results
 
         - name: Generate Allure Report
-          run: ./gradlew allureReport
+          run: ./gradlew allureReport --allure-results build/allure-results
 
         - name: Upload Allure Report
           uses: actions/upload-artifact@v4
