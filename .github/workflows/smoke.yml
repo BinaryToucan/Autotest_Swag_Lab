@@ -31,11 +31,10 @@ jobs:
           run: ./gradlew clean smokeTest
           continue-on-error: true
 
-        - name: Show report structure
+        - name: Check Allure results
           if: always()
           run: |
-            find build -type d -name "*allure*"
-            find build/allure-report -maxdepth 2 -type f || true
+            find build/allure-results -name "*-result.json"
 
         - name: Upload Allure results
           if: always()
@@ -45,10 +44,16 @@ jobs:
             path: build/allure-results
 
         - name: Generate Allure Report
-          run: ./gradlew clean smokeTest allureReport
+          run: ./gradlew allureReport
+
+        - name: Show report structure
+          if: always()
+          run: |
+            find build -type d -name "*allure*"
+            find build -name "index.html"
 
         - name: Upload Allure Report
           uses: actions/upload-artifact@v4
           with:
             name: allure-report
-            path: build/allure-report
+            path: build/reports/allure-report
