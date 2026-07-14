@@ -36,13 +36,6 @@ jobs:
           run: |
             find build/allure-results -name "*-result.json"
 
-        - name: Upload Allure results
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: allure-results
-            path: build/allure-results
-
         - name: Generate Allure Report
           run: ./gradlew allureReport
 
@@ -53,7 +46,10 @@ jobs:
             find build -name "index.html"
 
         - name: Upload Allure Report
+          if: always()
           uses: actions/upload-artifact@v4
           with:
             name: allure-report
-            path: build/reports/allure-report
+            path: |
+              build/reports/allure-report
+              build/allure-results
