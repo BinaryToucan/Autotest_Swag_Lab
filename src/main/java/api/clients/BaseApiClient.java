@@ -12,9 +12,14 @@ public class BaseApiClient {
     /// Базовая спецификация запроса
     protected RequestSpecification spec;
 
-    /// Инициализирует базовую спецификацию запросов
+    /// Инициализация
     public BaseApiClient() {
         this.spec = SpecificationConfig.requestSpec();
+    }
+
+    /// Инициализирует с заданной спецификацией запросов
+    public BaseApiClient(RequestSpecification spec) {
+        this.spec = spec;
     }
 
     /// Создаёт request specification для выполнения HTTP-запроса.
