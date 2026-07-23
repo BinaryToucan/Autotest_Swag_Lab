@@ -14,10 +14,10 @@ public class SpecificationConfig {
                 .build();
     }
 
-    ///Этот метод нужен для тестирования другого api (petstore)
-    public static RequestSpecification petStoreSpec() {
+    ///Этот метод нужен для тестирования другого api (dummyJson)
+    public static RequestSpecification dummySpec() {
         return new RequestSpecBuilder()
-                .setBaseUri(ConfigReader.getConfigProperty("base.api.petstore.url"))
+                .setBaseUri(ConfigReader.getConfigProperty("base.api.dummy.url"))
                 .setContentType(ContentType.JSON)
                 .build();
     }
