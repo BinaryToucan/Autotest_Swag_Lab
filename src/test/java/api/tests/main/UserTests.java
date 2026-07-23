@@ -1,6 +1,6 @@
-package api.tests;
+package api.tests.main;
 
-import api.clients.UserClient;
+import api.clients.main.UserClient;
 import api.models.user.User;
 import org.junit.jupiter.api.Test;
 import annotations.ApiTest;

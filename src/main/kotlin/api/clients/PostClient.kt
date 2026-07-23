@@ -2,14 +2,14 @@ package api.clients
 
 import api.models.CreatePostRequest
 import api.models.Post
-import api.utils.Endpoints
+import api.utils.MainEndpoints
 import io.restassured.response.Response
 
 class PostClient: BaseApiClient() {
 
     fun getPost(id: Int): Response =
         request()
-            .get("${Endpoints.POSTS}/$id")
+            .get("${MainEndpoints.POSTS}/$id")
 
     fun getPostAsModel(id: Int): Post =
         getPost(id)
@@ -20,7 +20,7 @@ class PostClient: BaseApiClient() {
 
     fun getPosts(): Response =
         request()
-            .get(Endpoints.POSTS)
+            .get(MainEndpoints.POSTS)
 
     fun getPostsAsList(): List<Post> =
         getPosts()
@@ -33,5 +33,5 @@ class PostClient: BaseApiClient() {
     fun createPost(post: CreatePostRequest): Response =
         request()
             .body(post)
-            .post(Endpoints.POSTS)
+            .post(MainEndpoints.POSTS)
 }

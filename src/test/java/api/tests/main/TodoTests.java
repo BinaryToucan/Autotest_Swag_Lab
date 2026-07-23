@@ -1,8 +1,9 @@
-package api.tests;
+package api.tests.main;
 
 import annotations.SmokeTest;
-import api.clients.TodoClient;
+import api.clients.main.TodoClient;
 import api.models.Todo;
+import api.tests.BaseTest;
 import io.qameta.allure.*;
 import lombok.val;
 import org.junit.jupiter.api.DisplayName;

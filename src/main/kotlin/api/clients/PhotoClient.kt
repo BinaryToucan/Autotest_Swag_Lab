@@ -1,14 +1,14 @@
 package api.clients
 
 import api.models.Photo
-import api.utils.Endpoints
+import api.utils.MainEndpoints
 import io.restassured.response.Response
 
 class PhotoClient: BaseApiClient() {
 
     fun getPhoto(id: Int): Response =
         request()
-            .get("${Endpoints.PHOTOS}/$id")
+            .get("${MainEndpoints.PHOTOS}/$id")
 
     fun getPhotoAsModel(id: Int): Photo =
         getPhoto(id)
@@ -20,7 +20,7 @@ class PhotoClient: BaseApiClient() {
     fun getPhotosByAlbumId(albumId: Int): Response =
         request()
             .queryParam("albumId", albumId)
-            .get(Endpoints.PHOTOS)
+            .get(MainEndpoints.PHOTOS)
 
     fun getPhotosAsListByAlbumId(albumId: Int): List<Photo> =
         getPhotosByAlbumId(albumId)

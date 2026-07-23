@@ -1,10 +1,11 @@
-package api.clients;
+package api.clients.main;
 
-import api.utils.Endpoints;
+import api.clients.BaseApiClient;
+import api.utils.MainEndpoints;
 import io.restassured.response.Response;
 
 /// Клиент для работы с User API
-public class UserClient extends BaseApiClient{
+public class UserClient extends BaseApiClient {
 
     /// Получает список всех пользователей.
     /// @return HTTP response со списком пользователей
@@ -12,7 +13,7 @@ public class UserClient extends BaseApiClient{
         return request()
                 .when()
                 .log().all()
-                .get(Endpoints.USERS);
+                .get(MainEndpoints.USERS);
     }
 
     /// Получает пользователя по его идентификатору.
@@ -22,6 +23,6 @@ public class UserClient extends BaseApiClient{
         return request()
                 .when()
                 .log().all()
-                .get(Endpoints.USERS + "/" + id);
+                .get(MainEndpoints.USERS + "/" + id);
     }
 }

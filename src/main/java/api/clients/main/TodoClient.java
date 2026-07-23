@@ -1,7 +1,8 @@
-package api.clients;
+package api.clients.main;
 
+import api.clients.BaseApiClient;
 import api.models.Todo;
-import api.utils.Endpoints;
+import api.utils.MainEndpoints;
 import io.restassured.response.Response;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 /// Клиент для работы с Todo API
-public class TodoClient extends BaseApiClient{
+public class TodoClient extends BaseApiClient {
 
     /// Получает одну задачу по её идентификатору.
     /// @param id идентификатор задачи
@@ -17,21 +18,21 @@ public class TodoClient extends BaseApiClient{
     public Response getTodo(int id) {
         return request()
                 .when()
-                .get(Endpoints.TODOS + "/" + id);
+                .get(MainEndpoints.TODOS + "/" + id);
     }
 
     /// Получает список всех задач.
     /// @return HTTP response со списком задач
     public Response getAllTodos() {
         return request()
-                .get(Endpoints.TODOS);
+                .get(MainEndpoints.TODOS);
     }
 
     /// Получает список всех задач как список.
     /// @return список задач
     public List<Todo> getAllTodosAsList() {
         return request()
-                .get(Endpoints.TODOS)
+                .get(MainEndpoints.TODOS)
                 .then()
                 .extract()
                 .jsonPath()
